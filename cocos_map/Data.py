@@ -35,6 +35,11 @@ class Data():
         Video           = VideoStruct(X, Y, ImgSequence, m, n, l, dx, dt, label)
         return Video
     
+    def set_plot_limits(d_lims,diff_lims,err_lims):
+        PlotLimStruct   = namedtuple('struct', ['d_lims', 'diff_lims', 'err_lims'])
+        PlotLims        = PlotLimStruct(d_lims, diff_lims, err_lims)
+        return PlotLims
+    
     @classmethod
     def get_Video(cls,label, startx = None, stopx = None, starty = None, stopy = None, step = None):
         print('load video data...', end =" ")
@@ -46,7 +51,11 @@ class Data():
             Y           = DuckArgus['YY']
             ImgSequence = DuckArgus['TimeStack']
             dx          = DuckArgus['dx'][0][0]
-            dt          = DuckArgus['dt'][0][0]      
+            dt          = DuckArgus['dt'][0][0]   
+            # only for visualization
+            d_lims      = [0,6]
+            diff_lims   = [-1.5,1.5]
+            err_lims    = [0, 2]
         if label == 'scheveningen':   
             if step is None: step = 1 #set default step
             SchevDrone  = np.load('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/Drone/voorMathijs/MatthijsProducts/Rect_cutoff_DJI_0001_fps_2_cv1150_big_dx2.npz')#'Rect_DJI_0001_fps_2_cv1150_big_dx2.npz')#Rect_cutoff_DJI_0001_fps_2_cv1150_big_dx2
@@ -55,6 +64,10 @@ class Data():
             ImgSequence = SchevDrone['RectMov_gray']
             dx          = SchevDrone['dx']
             dt          = SchevDrone['dt']
+            # only for visualization
+            d_lims      = [0,8]
+            diff_lims   = [-1.5,1.5]
+            err_lims    = [0, 2]
         if label == 'narrabeen':      
             if step is None: step = 1 #set default step
             NarraDrone  = np.load('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/Drone/Australia/Flight2_thesis/MatthijsProducts/Rect_new_DJI_0009_fps_2_noArrow_origLcpAndDistortCoeffs.npz')#'Rect_new_frame1070_DJI_0009_fps_2_onlyVosGcps.npz')#'Rect_new_DJI_0009_fps_2_noArrow_Flights12LcpAnd_d1_002.npz')#'Rect_new_DJI_0009_fps_2_noArrow_origLcpAndDistortCoeffs.npz')
@@ -66,6 +79,10 @@ class Data():
             mask        = ~cls.inpoly(X,Y,np.array([341000,342400,342700,341000]),np.array([626700,6267200,6270000,6270000]))
             for ii in range(ImgSequence.shape[2]):
                 ImgSequence[:,:,ii] *= mask
+            # only for visualization
+            d_lims      = [0,16]
+            diff_lims   = [-1.5,1.5]
+            err_lims    = [0, 2]    
         if label == 'porthtowan': 
             if step is None: step = 1 #set default step
             PortTArgus  = loadmat('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/PorthTowan/Bathy_MAT_files2014/MatthijsProducts/1397121301.Thu.Apr.10_09_15_01.UTC.2014_porthtowan_gridded2_dx5_trunc.mat')#1397027701.Wed.Apr.09_07_15_01.UTC.2014_porthtowan_gridded2_dx5.mat(good:-0.944874362495324)#1397034901.Wed.Apr.09_09_15_01.UTC.2014_porthtowan_gridded2_dx5.mat(-0.258237984059989)#1397038502.Wed.Apr.09_10_15_02.UTC.2014_porthtowan_gridded2_dx5.mat(0.231167373468409)#1397049302.Wed.Apr.09_13_15_02.UTC.2014_porthtowan_gridded2_dx5.mat(1.024765570013350)#1397060101.Wed.Apr.09_16_15_01.UTC.2014_porthtowan_gridded2_dx5.mat(good:0.115154418969808)#'1397121301.Thu.Apr.10_09_15_01.UTC.2014_porthtowan_gridded2_dx5.mat'(very good:-0.964546845297460)#'1397128502.Thu.Apr.10_11_15_02.UTC.2014_porthtowan_gridded2_dx5'(0.231713186333518)#'1397139302.Thu.Apr.10_14_15_02.UTC.2014_porthtowan_gridded2_dx5.mat'(1.431498396339975)#1397142901.Thu.Apr.10_15_15_01.UTC.2014_porthtowan_gridded2_dx5.mat'(1.173524417485523)#'1397146501.Thu.Apr.10_16_15_01.UTC.2014_porthtowan_gridded2_dx5.mat'(very good: 0.601465679011026)#'1397150101.Thu.Apr.10_17_15_01.UTC.2014_porthtowan_gridded2_dx5.mat'(very good: -0.096778174716902)#
@@ -76,33 +93,11 @@ class Data():
             dt          = PortTArgus['dt'][0][0]     
             mask        = ~cls.inpoly(X,Y,np.array([0,300,482,0]),np.array([580,580,-300,-300]))
             for ii in range(ImgSequence.shape[2]):
-                ImgSequence[:,:,ii] *= mask
-        if label == 'capbreton':
-            if step is None: step = 2 #set default step            
-            CapbretSat  = loadmat('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/Pleiades/Movie6.mat')   
-            X           = CapbretSat['XX']
-            Y           = CapbretSat['YY']
-            ImgSequence = CapbretSat['TimeStack']
-            dx          = CapbretSat['dx'][0][0]
-            dt          = CapbretSat['dt'][0][0] 
-            # demean per frame
-            Nt          = ImgSequence.shape[2]
-            isbad_IX    = (np.isnan(ImgSequence)) | (ImgSequence == 0)
-            ImgSequence[isbad_IX] = np.nan
-            for ii in range(Nt):
-                ImgSequence[:,:,ii] = ImgSequence[:,:,ii] - np.nanmean(ImgSequence[:,:,ii])
-            # detrend in time per pixle     
-# =============================================================================
-#             ImgSequence[isbad_IX] = 0
-#             ImgSequence = detrend(ImgSequence, axis = -1, type = 'linear') 
-#             ImgSequence[isbad_IX] = np.nan
-#             # maxmin normalize in time per pixle 
-#             Imgtime_min = np.nanmin(ImgSequence,-1)
-#             Imgtime_max = np.nanmax(ImgSequence,-1)
-#             for ii in range(Nt):
-#                 ImgSequence[:,:,ii] = (ImgSequence[:,:,ii]-Imgtime_min)/(Imgtime_max-Imgtime_min)              
-#             ImgSequence[(np.isnan(ImgSequence) | np.isinf(ImgSequence))] = np.nan     
-# =============================================================================           
+                ImgSequence[:,:,ii] *= mask   
+            # only for visualization
+            d_lims      = [0,8]
+            diff_lims   = [-1.5,1.5]
+            err_lims    = [0, 2]        
         if label == 'fig3':
             if step is None: step = 1 #set default step
             T   = 600
@@ -142,7 +137,7 @@ class Data():
         
         end = time.time()
         print('CPU time: {} s'.format(np.round((end-start)*100)/100))
-        return Data.set_Video(X[ix_y,ix_x], Y[ix_y,ix_x], ImgSequence[ix_y,ix_x,:], m, n, l, dx*step, dt, label)
+        return Data.set_Video(X[ix_y,ix_x], Y[ix_y,ix_x], ImgSequence[ix_y,ix_x,:], m, n, l, dx*step, dt, label), Data.set_plot_limits(d_lims,diff_lims,err_lims)
 
     def get_GroundTruth(opts, Video, grid, step = None): 
         print('   load ground truth data...', end =" ")
@@ -173,17 +168,11 @@ class Data():
             Z_groundTruth   = interpolate.griddata((bathy_xyz[:,0], bathy_xyz[:,1]), bathy_xyz[:,2],(grid.X, grid.Y),method='linear')
             D_groundTruth   = Z_groundTruth+WL
         elif Video.label == 'porthtowan':
-            WL              = -0.964546845297460
+            WL              = -0.96
             ErwinPortT      = loadmat('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/PorthTowan/PTB_01_09042014_int.mat')
             Xmeas,Ymeas     = ErwinPortT['Xi'],ErwinPortT['Yi']
             Z_groundTruth   = interpolate.griddata((np.ravel(Xmeas), np.ravel(Ymeas)), np.ravel(ErwinPortT['Zi']),(grid.X, grid.Y),method='linear')
             D_groundTruth   = -1*Z_groundTruth+WL    
-        elif Video.label == 'capbreton':
-            if step is None: step = 2
-            WL              = 0.4
-            CapbretSat      = loadmat('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/Pleiades/Movie6.mat')   
-            Z_groundTruth   = interpolate.griddata((np.ravel(Video.X), np.ravel(Video.Y)), np.ravel(CapbretSat['BathySurvey'][::step,::step]),(grid.X, grid.Y),method='nearest')
-            D_groundTruth   = -1*Z_groundTruth+WL
         else: 
             print('No ground truth depth provided')
             D_groundTruth = np.nan       

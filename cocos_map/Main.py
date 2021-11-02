@@ -27,13 +27,13 @@ fieldsite   = 'duck'
 # LOAD VIDEO DATA
 # -----------------------------------------------------------------------------
 # load video data
-Video = Data.get_Video(fieldsite)
+Video,PlotLims   = Data.get_Video(fieldsite)
 #%% 
 # -----------------------------------------------------------------------------
 # OPTIONS
 # -----------------------------------------------------------------------------
 # set options
-opts = Options(Video, CPU_speed = 'slow', parallel_flag = True, gc_kernel_sampnum = 80)
+opts = Options(Video, CPU_speed = 'slow', parallel_flag = True, gc_kernel_sampnum = 80, f_scale = 0.012)
 #%%
 # -----------------------------------------------------------------------------
 # INITIALIZE
@@ -70,7 +70,7 @@ Cxk = [];   Cyk = [];               # OPTIONAL: for saving results
 frame_start     = 0
 cnt             = 0
 while frame_start+opts.Nt <= Video.ImgSequence.shape[2]: #(remove <= tt for unlimited analysis)        
-    print('\n --------------- START Update #{:} ---------------\n'.format(cnt+1))
+    print('\n --------------- START Update #{:} ---------------\n'.format(cnt+1))    
     t_real_start    = time.time()
     t               = (frame_start + np.round(opts.Nt/2))*Video.dt
     # make timestamps of frame sequence
@@ -94,6 +94,8 @@ while frame_start+opts.Nt <= Video.ImgSequence.shape[2]: #(remove <= tt for unli
         continue    
     # frequency filter Dynamic Modes
     dmd.filter_frequencybounds()
+    # delete weak Dynamic Modes
+    dmd.del_weak_modes()
     # get Fourier compliant spectral amplitudes
     dmd.get_b_fourier()
     # convert Dynamic Modes to phase images
@@ -118,12 +120,14 @@ while frame_start+opts.Nt <= Video.ImgSequence.shape[2]: #(remove <= tt for unli
     else:
         frame_start = frame_start+opts.frame_int
     # simple visualization of results
-    d_lims      = [0,8]
-    diff_lims   = [-1.5,1.5]
-    err_lims    = [0, 2]
+# =============================================================================
+#     d_lims      = [0,6]
+#     diff_lims   = [-1.5,1.5]
+#     err_lims    = [0, 2]
+# =============================================================================
     if cnt > 0:
         try:
-            plot.results(opts, grid, Results, KalObj, InvStg, d_lims, diff_lims, err_lims, InvObj.kernel_samp, (dmd.A_fft, dmd.omegas_fft), (dmd.b_fourier,dmd.omega), t_shift)
+            plot.results(opts, grid, Results, KalObj, InvStg, PlotLims.d_lims, PlotLims.diff_lims, PlotLims.err_lims, InvObj.kernel_samp, (dmd.A_fft, dmd.omegas_fft), (dmd.b_fourier,dmd.omega), t_shift)
         except:
             print('no plot. probably empty results')
 #%%
@@ -141,4 +145,6 @@ while frame_start+opts.Nt <= Video.ImgSequence.shape[2]: #(remove <= tt for unli
 Cxy_omega   = Results.c_omega
 Dgt         = Data.get_GroundTruth(opts, Video, grid, step = None)
 
-np.savez('Results/' + fieldsite + '_CPU_speed_'+ opts.CPU_speed,    t_iter = t_iter, Dk = Dk, Uk = Uk, Vk = Vk, Cxk = Cxk, Cyk = Cyk, Cxy_omega = Cxy_omega, Dgt = Dgt, grid_dx = grid.dx, grid_X = grid.X, grid_Y = grid.Y, grid_Rows_ctr = grid.Rows_ctr, grid_Cols_ctr = grid.Cols_ctr) 
+# =============================================================================
+# np.savez('Results/' + fieldsite + '_CPU_speed_'+ opts.CPU_speed,    t_iter = t_iter, Dk = Dk, Uk = Uk, Vk = Vk, Cxk = Cxk, Cyk = Cyk, Cxy_omega = Cxy_omega, Dgt = Dgt, grid_dx = grid.dx, grid_X = grid.X, grid_Y = grid.Y, grid_Rows_ctr = grid.Rows_ctr, grid_Cols_ctr = grid.Cols_ctr) 
+# =============================================================================

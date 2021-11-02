@@ -284,7 +284,17 @@ class DMD():
             self.b  = self.b*2 #if good signal then conjugate has same energy. Otherwise conjugate pairs of b have to be added together instead.
         end     = time.time()    
         print('CPU time: {} s'.format(np.round((end-start)*100)/100))
-        
+    
+    def del_weak_modes(self):
+        del_IX  = self.b == 0 # see beta_tilde2phi_b for rules when b = 0
+        if np.any(del_IX):
+            print('delete {} weak Dynamic Mode(s)...'.format(np.sum(del_IX)))
+            self.omega  = self.omega[~del_IX]
+            self.f      = self.f[~del_IX]
+            self.phi    = self.phi[:,~del_IX]
+            self.b      = self.b[~del_IX]
+            self.Nw     = len(self.b)
+    
     def stack_phi(self):
         print('stack Dynamic Mode layers...')
         self.phi    = np.reshape(self.phi,(self.m,self.n,self.Nw), order="F")    
@@ -384,6 +394,7 @@ class OptDMD(DMD):
             # -------------------------------------------------------------------------------------------
             if self.opts.iniDMD_exact == 'nonequidistant':
                 order = 4
+                print('      order = {}'.format(order))
                 trunc = order - 2                      
 # =============================================================================
 #                 ux_start = copy(self.Xvid) #without projection on U also works but more expensive and not necessary
@@ -506,8 +517,8 @@ class OptDMD(DMD):
             inds_small              = b < 10*np.finfo(float).eps*np.max(b)
             b[inds_small]           = 1.0
             phi_tilde               = self.beta_tilde @ np.diag(1.0/b)
-            phi_tilde[:,inds_small] = 0.0
-            b[inds_small]           = 0.0
+            phi_tilde[:,inds_small] = 0.0 #future implementation rather delete, but messes with current handling of dimensionalities, allocations and sorting (often based on self.opts.r_DMD): phi_tilde  = np.delete(phi_tilde, obj = np.where(inds_small)[0], axis = -1)
+            b[inds_small]           = 0.0 #future implementation rather delete, but messes with current handling of dimensionalities, allocations and sorting (often based on self.opts.r_DMD): b          = np.delete(b, obj = np.where(inds_small)[0], axis = -1)
             if self.opts.excl_nan_flag:
                 self.phi                    = np.zeros((self.m*self.n, self.opts.r_DMD), dtype = 'complex64')
                 self.phi[~self.badpix_IX,:] = self.u[:self.Npx,:] @ phi_tilde #need to specify :np.sum(~self.badpix_IX) for case that opts.standing_wave_flag == True

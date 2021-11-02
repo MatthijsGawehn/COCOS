@@ -24,6 +24,7 @@ class Plot:
         
         # load ground truth data
         self.D_groundTruth = Data.get_GroundTruth(opts, Video, grid, step = step)
+        self.D_groundTruth[self.D_groundTruth>35] = np.nan
         
         self.color1 = 'tab:blue'
         self.color2 = 'tab:red'
@@ -187,4 +188,3 @@ class Plot:
         plt.pause(0.05)
         plt.tight_layout()
         plt.pause(0.05)
- 

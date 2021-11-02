@@ -34,7 +34,7 @@ class Varpro():
                  fulljac_flag   = False,
                  tikh_flag      = False,
                  gamma          = 1,
-                 proxfun_flag   = False #not yet implemented
+                 proxfun_flag   = False
                  ):
         print('      opt DMD with max # iterations = {}'.format(maxiter))
         print('      opt DMD with full jacobian = {}'.format(fulljac_flag))

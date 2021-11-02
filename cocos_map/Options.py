@@ -29,7 +29,7 @@ class Options():
                  CPU_speed          = 'normal',         # 'fast','normal','slow','exact' --> determines number of grid cells to be inverted
                  grid_dx            = None,             # [m] grid cell resolution can be hardcoded. CPU_speed is ignored in that case
                  gc_kernel_rad      = 75,               # [m] radius of kernel to be used around a grid cell to better capture wavedirections and their modulation by near-surface currents u,v
-                 gc_kernel_sampnum  = 16,               # [#] number of grid cells that are sampled within gc kernel
+                 gc_kernel_sampnum  = 17,               # [#] number of grid cells that are sampled within gc kernel
                  reweight           = True,             # reweight spectral quality weights of SSPCs from surrounding gcs
                  fitter             = 'SLSQP',          # 'LM+activation','SLSQP' --> LM with loss = linear cannot use depth bounds
                  loss               = 'cauchy',         # 'linear','cauchy' --> 'cauchy' uses 'f_scale'  

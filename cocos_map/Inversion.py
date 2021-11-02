@@ -315,7 +315,7 @@ class Inversion():
             # --------
             cloudtype = 'diff'
             reflect   = False
-            if True:#OPTIONAL: don't fit SSPC of first update, but only DSPCs of later updates --> if (kx_store_gc[0] != []) | (kx_store_gc[1] != []):  
+            if True: #OPTIONAL: don't fit SSPC of first update, but only DSPCs of later updates --> if (kx_store_gc[0] != []) | (kx_store_gc[1] != []):  
                 #augment SSPC to DSPC (using temporarily stored SSPCs within Rad)
                 Kx_combi        = self.get_inv_W(Kx_filt1,kx_store_gc)
                 Ky_combi        = self.get_inv_W(Ky_filt1,ky_store_gc) 
@@ -748,7 +748,7 @@ class Inversion():
         gc_Omega_prior  = [np.nan] * gc_Nw; gc_omegas_prior = [np.nan] * gc_Nw  
         gc_Kxthr_prior  = [np.nan] * gc_Nw; gc_Kythr_prior  = [np.nan] * gc_Nw                   
         
-        for ii in range(gc_Nw):
+        for ii in range(gc_Nw):            
             gc_Kxthr_prior[ii], gc_Kythr_prior[ii], gc_Omega_prior[ii], gc_omegas_prior[ii], gc_PIV_weights[ii], bad = gc_dm_K_prior_layer(opts, gc_dm = gc_dm_Pyramid[ii], p = gc_Tapers[ii], omega = gc_omegas[ii], dx = gc_dx[ii])                                       
             if not bad: 
                 gc_inp_weights[ii] = np.ones(gc_Kxthr_prior[ii].shape)*weights[ii]
@@ -971,6 +971,7 @@ class Inversion():
                 J[:,2]  = 0.5*(f_scale**2*W_points*np.log1p(F**2))**(-0.5)*f_scale**2*W_points*1/(1+F**2)*2*F*Jv
 
                 nmp     = n - p
+                if nmp == 0: nmp = 1 #runtime fix
                 ssq     = rss / nmp
                 _, s, VT    = np.linalg.svd(J, full_matrices=False) #scipy.linalg
                 threshold   = np.finfo(float).eps * max(J.shape) * s[0]

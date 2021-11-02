@@ -24,7 +24,7 @@ class Grid:
             elif opts.CPU_speed == 'slow':
                 discretization = 45   
             elif opts.CPU_speed == 'accurate':
-                discretization = 60    
+                discretization = 80    
             elif opts.CPU_speed == 'exact':
                 discretization = 500 
             self.Npx_min    = int(np.max([opts.Npx_fftmin, round(opts.Nm_fftmin/Video.dx) + round(opts.Nm_fftmin/Video.dx) % 2]))
