@@ -46,7 +46,7 @@ class Data():
         start = time.time()
         if label == 'duck': # define label
             if step is None: step = 1 #set default step
-            DuckArgus   = loadmat('C:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/ArgusStack/Interp_testStack102210Duck.mat')
+            DuckArgus   = loadmat('Data/Video_Duck.mat')
             X           = DuckArgus['XX']
             Y           = DuckArgus['YY']
             ImgSequence = DuckArgus['TimeStack']
@@ -58,7 +58,7 @@ class Data():
             err_lims    = [0, 2]
         if label == 'scheveningen':   
             if step is None: step = 1 #set default step
-            SchevDrone  = np.load('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/Drone/voorMathijs/MatthijsProducts/Rect_cutoff_DJI_0001_fps_2_cv1150_big_dx2.npz')#'Rect_DJI_0001_fps_2_cv1150_big_dx2.npz')#Rect_cutoff_DJI_0001_fps_2_cv1150_big_dx2
+            SchevDrone  = np.load('Data/Video_Scheveningen.npz')
             X           = SchevDrone['X']
             Y           = SchevDrone['Y']
             ImgSequence = SchevDrone['RectMov_gray']
@@ -70,7 +70,7 @@ class Data():
             err_lims    = [0, 2]
         if label == 'narrabeen':      
             if step is None: step = 1 #set default step
-            NarraDrone  = np.load('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/Drone/Australia/Flight2_thesis/MatthijsProducts/Rect_new_DJI_0009_fps_2_noArrow_origLcpAndDistortCoeffs.npz')#'Rect_new_frame1070_DJI_0009_fps_2_onlyVosGcps.npz')#'Rect_new_DJI_0009_fps_2_noArrow_Flights12LcpAnd_d1_002.npz')#'Rect_new_DJI_0009_fps_2_noArrow_origLcpAndDistortCoeffs.npz')
+            NarraDrone  = np.load('Data/Video_Narrabeen.npz')
             X           = NarraDrone['X']
             Y           = NarraDrone['Y']
             ImgSequence = NarraDrone['RectMov_gray']
@@ -85,7 +85,7 @@ class Data():
             err_lims    = [0, 2]    
         if label == 'porthtowan': 
             if step is None: step = 1 #set default step
-            PortTArgus  = loadmat('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/PorthTowan/Bathy_MAT_files2014/MatthijsProducts/1397121301.Thu.Apr.10_09_15_01.UTC.2014_porthtowan_gridded2_dx5_trunc.mat')#1397027701.Wed.Apr.09_07_15_01.UTC.2014_porthtowan_gridded2_dx5.mat(good:-0.944874362495324)#1397034901.Wed.Apr.09_09_15_01.UTC.2014_porthtowan_gridded2_dx5.mat(-0.258237984059989)#1397038502.Wed.Apr.09_10_15_02.UTC.2014_porthtowan_gridded2_dx5.mat(0.231167373468409)#1397049302.Wed.Apr.09_13_15_02.UTC.2014_porthtowan_gridded2_dx5.mat(1.024765570013350)#1397060101.Wed.Apr.09_16_15_01.UTC.2014_porthtowan_gridded2_dx5.mat(good:0.115154418969808)#'1397121301.Thu.Apr.10_09_15_01.UTC.2014_porthtowan_gridded2_dx5.mat'(very good:-0.964546845297460)#'1397128502.Thu.Apr.10_11_15_02.UTC.2014_porthtowan_gridded2_dx5'(0.231713186333518)#'1397139302.Thu.Apr.10_14_15_02.UTC.2014_porthtowan_gridded2_dx5.mat'(1.431498396339975)#1397142901.Thu.Apr.10_15_15_01.UTC.2014_porthtowan_gridded2_dx5.mat'(1.173524417485523)#'1397146501.Thu.Apr.10_16_15_01.UTC.2014_porthtowan_gridded2_dx5.mat'(very good: 0.601465679011026)#'1397150101.Thu.Apr.10_17_15_01.UTC.2014_porthtowan_gridded2_dx5.mat'(very good: -0.096778174716902)#
+            PortTArgus  = loadmat('Data/Video_Porthtowan.mat')
             X           = PortTArgus['X'][26:,:181]
             Y           = PortTArgus['Y'][26:,:181]
             ImgSequence = PortTArgus['ImgSequence'][26:,:181]
@@ -144,13 +144,13 @@ class Data():
         start = time.time()
         if Video.label == 'duck':
             WL              = 0.077
-            CRABDuck        = loadmat('C:/svn_repo/CIRN/cBathy-Toolbox/19-Oct-2010FRFGridded.mat')
+            CRABDuck        = loadmat('Data/GroundTruth_Duck.mat')
             [Xmeas,Ymeas]   = np.meshgrid(CRABDuck['xm'],CRABDuck['ym'])
             Z_groundTruth   = interpolate.griddata((np.ravel(Xmeas), np.ravel(Ymeas)), np.ravel(CRABDuck['zi']),(grid.X, grid.Y),method='linear')
             D_groundTruth   = -1*Z_groundTruth+WL
         elif Video.label == 'scheveningen':
             WL              = 0.6
-            with open('C:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/Drone/voorMathijs/bathy/ScheveningenJanBert_XYZ_RDNAP.txt') as f:
+            with open('Data/GroundTruth_Scheveningen.txt') as f:
                 list_of_lists   = [[x for x in line.split()] for line in f]
                 flattened_list  = [y for x in list_of_lists for y in x]
             bathydata   = np.array(flattened_list[19:]).astype('float') 
@@ -162,14 +162,14 @@ class Data():
             D_groundTruth   = -1*Z_groundTruth+WL                    
         elif Video.label == 'narrabeen':
             WL              = 0.67
-            with open('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/Drone/Australia/jetski_surveys/20170529/2017_0529 Narrabeen Post ECL No4 Hydro Depths.xyz') as f:
+            with open('Data/GroundTruth_Narrabeen.xyz') as f:
                 list_of_lists   = [line.split() for line in f]
                 bathy_xyz       = np.array(list_of_lists, dtype = float)
             Z_groundTruth   = interpolate.griddata((bathy_xyz[:,0], bathy_xyz[:,1]), bathy_xyz[:,2],(grid.X, grid.Y),method='linear')
             D_groundTruth   = Z_groundTruth+WL
         elif Video.label == 'porthtowan':
             WL              = -0.96
-            ErwinPortT      = loadmat('c:/Users/gawehn/OneDrive - Stichting Deltares/Desktop/PhD/data/PorthTowan/PTB_01_09042014_int.mat')
+            ErwinPortT      = loadmat('Data/GroundTruth_Porthtowan.mat')
             Xmeas,Ymeas     = ErwinPortT['Xi'],ErwinPortT['Yi']
             Z_groundTruth   = interpolate.griddata((np.ravel(Xmeas), np.ravel(Ymeas)), np.ravel(ErwinPortT['Zi']),(grid.X, grid.Y),method='linear')
             D_groundTruth   = -1*Z_groundTruth+WL    
