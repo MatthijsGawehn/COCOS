@@ -46,7 +46,7 @@ class Data():
         start = time.time()
         if label == 'duck': # define label
             if step is None: step = 1 #set default step
-            DuckArgus   = loadmat('Data/Video_Duck.mat')
+            DuckArgus   = loadmat('../data/Video_Duck.mat')
             X           = DuckArgus['XX']
             Y           = DuckArgus['YY']
             ImgSequence = DuckArgus['TimeStack']
@@ -58,7 +58,7 @@ class Data():
             err_lims    = [0, 2]
         if label == 'scheveningen':   
             if step is None: step = 1 #set default step
-            SchevDrone  = np.load('Data/Video_Scheveningen.npz')
+            SchevDrone  = np.load('../data/Video_Scheveningen.npz')
             X           = SchevDrone['X']
             Y           = SchevDrone['Y']
             ImgSequence = SchevDrone['RectMov_gray']
@@ -70,7 +70,7 @@ class Data():
             err_lims    = [0, 2]
         if label == 'narrabeen':      
             if step is None: step = 1 #set default step
-            NarraDrone  = np.load('Data/Video_Narrabeen.npz')
+            NarraDrone  = np.load('../data/Video_Narrabeen.npz')
             X           = NarraDrone['X']
             Y           = NarraDrone['Y']
             ImgSequence = NarraDrone['RectMov_gray']
@@ -85,7 +85,7 @@ class Data():
             err_lims    = [0, 2]    
         if label == 'porthtowan': 
             if step is None: step = 1 #set default step
-            PortTArgus  = loadmat('Data/Video_Porthtowan.mat')
+            PortTArgus  = loadmat('../data/Video_Porthtowan.mat')
             X           = PortTArgus['X'][26:,:181]
             Y           = PortTArgus['Y'][26:,:181]
             ImgSequence = PortTArgus['ImgSequence'][26:,:181]
@@ -144,13 +144,13 @@ class Data():
         start = time.time()
         if Video.label == 'duck':
             WL              = 0.077
-            CRABDuck        = loadmat('Data/GroundTruth_Duck.mat')
+            CRABDuck        = loadmat('../data/GroundTruth_Duck.mat')
             [Xmeas,Ymeas]   = np.meshgrid(CRABDuck['xm'],CRABDuck['ym'])
             Z_groundTruth   = interpolate.griddata((np.ravel(Xmeas), np.ravel(Ymeas)), np.ravel(CRABDuck['zi']),(grid.X, grid.Y),method='linear')
             D_groundTruth   = -1*Z_groundTruth+WL
         elif Video.label == 'scheveningen':
             WL              = 0.6
-            with open('Data/GroundTruth_Scheveningen.txt') as f:
+            with open('../data/GroundTruth_Scheveningen.txt') as f:
                 list_of_lists   = [[x for x in line.split()] for line in f]
                 flattened_list  = [y for x in list_of_lists for y in x]
             bathydata   = np.array(flattened_list[19:]).astype('float') 
@@ -162,14 +162,14 @@ class Data():
             D_groundTruth   = -1*Z_groundTruth+WL                    
         elif Video.label == 'narrabeen':
             WL              = 0.67
-            with open('Data/GroundTruth_Narrabeen.xyz') as f:
+            with open('../data/GroundTruth_Narrabeen.xyz') as f:
                 list_of_lists   = [line.split() for line in f]
                 bathy_xyz       = np.array(list_of_lists, dtype = float)
             Z_groundTruth   = interpolate.griddata((bathy_xyz[:,0], bathy_xyz[:,1]), bathy_xyz[:,2],(grid.X, grid.Y),method='linear')
             D_groundTruth   = Z_groundTruth+WL
         elif Video.label == 'porthtowan':
             WL              = -0.96
-            ErwinPortT      = loadmat('Data/GroundTruth_Porthtowan.mat')
+            ErwinPortT      = loadmat('../data/GroundTruth_Porthtowan.mat')
             Xmeas,Ymeas     = ErwinPortT['Xi'],ErwinPortT['Yi']
             Z_groundTruth   = interpolate.griddata((np.ravel(Xmeas), np.ravel(Ymeas)), np.ravel(ErwinPortT['Zi']),(grid.X, grid.Y),method='linear')
             D_groundTruth   = -1*Z_groundTruth+WL    
