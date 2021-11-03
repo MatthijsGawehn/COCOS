@@ -134,17 +134,17 @@ while frame_start+opts.Nt <= Video.ImgSequence.shape[2]: #(remove <= tt for unli
 # -----------------------------------------------------------------------------
 # OPTIONAL: SAVE RESULTS
 # -----------------------------------------------------------------------------            
-    # save data from update for postprocessing       
-    t_iter.append(t)    
-    Dk.append(np.copy(KalObj.derrt_prev))
-    Uk.append(np.copy(KalObj.uerrt_prev))
-    Vk.append(np.copy(KalObj.verrt_prev))    
-    Cxk.append(np.copy(KalObj.cxerrt_prev))
-    Cyk.append(np.copy(KalObj.cyerrt_prev))
-# save other     
-Cxy_omega   = Results.c_omega
-Dgt         = Data.get_GroundTruth(opts, Video, grid, step = None)
-
 # =============================================================================
-# np.savez('Results/' + fieldsite + '_CPU_speed_'+ opts.CPU_speed,    t_iter = t_iter, Dk = Dk, Uk = Uk, Vk = Vk, Cxk = Cxk, Cyk = Cyk, Cxy_omega = Cxy_omega, Dgt = Dgt, grid_dx = grid.dx, grid_X = grid.X, grid_Y = grid.Y, grid_Rows_ctr = grid.Rows_ctr, grid_Cols_ctr = grid.Cols_ctr) 
+#     # save data from update for postprocessing       
+#     t_iter.append(t)    
+#     Dk.append(np.copy(KalObj.derrt_prev))
+#     Uk.append(np.copy(KalObj.uerrt_prev))
+#     Vk.append(np.copy(KalObj.verrt_prev))    
+#     Cxk.append(np.copy(KalObj.cxerrt_prev))
+#     Cyk.append(np.copy(KalObj.cyerrt_prev))
+# # save other     
+# Cxy_omega   = Results.c_omega
+# Dgt         = Data.get_GroundTruth(opts, Video, grid, step = None)
+# 
+# np.savez('../results/' + fieldsite + '_CPU_speed_'+ opts.CPU_speed,    t_iter = t_iter, Dk = Dk, Uk = Uk, Vk = Vk, Cxk = Cxk, Cyk = Cyk, Cxy_omega = Cxy_omega, Dgt = Dgt, grid_dx = grid.dx, grid_X = grid.X, grid_Y = grid.Y, grid_Rows_ctr = grid.Rows_ctr, grid_Cols_ctr = grid.Cols_ctr) 
 # =============================================================================
