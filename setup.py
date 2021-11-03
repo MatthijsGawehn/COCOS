@@ -10,7 +10,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['Click>=7.0', ]
+requirements = ['Click>=7.0', 'spyder==5.1.5', 'numpy==1.20.3', 'opencv-python==4.1.2.30', 'matplotlib==3.3.1', 'mat73==0.46', 'scipy==1.6.2', 'joblib==1.0.1', 'scikit-image==0.18.1']
 
 test_requirements = ['pytest>=3', ]
 
