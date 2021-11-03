@@ -17,7 +17,7 @@ from mpl_toolkits.mplot3d import axes3d
 import matplotlib.pyplot as plt
 #import dask.array as da
 #from dask.array.linalg import svd_compressed as dasvd
-from dask.array import from_array
+#from dask.array import from_array
 #from dask import visualize as davisualize
 
 class DMD():
