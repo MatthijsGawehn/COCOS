@@ -20,7 +20,7 @@ COCOS
 
 
 
-on-the-flt estimation of coastal paramters from videos of a wave field
+on-the-fly estimation of coastal paramters from videos of a wave field
 
 
 * Free software: GNU General Public License v3
