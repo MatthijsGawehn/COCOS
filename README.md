@@ -12,7 +12,7 @@ Although not necessary you may start by downloading anaconda and the anaconda na
 
 Installation of COCOS
 ---------------------
-install directly from pypi:
+install directly from PyPI:
 1. make a new environment and give it a name e.g. cocos_env (if you use anaconda navigator >environments>create)
 2. open terminal in that environment (in anaconda navigator > click on the new environment>press green circled arrow>open Terminal)
 3. type >"pip install cocos-map"
