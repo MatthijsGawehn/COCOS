@@ -24,14 +24,19 @@ Go to www.COCOSdata..... and download the data
 
 copy the data in the "data" folder in "COCOS_main"
 
+If you want to try your own data:
+- go to Data.py
+- add your video in the same format as the provided field site videos (under the method "get_Video")and give it a label (e.g., label == 'monterey'). By setting fieldsite = 'monterey' in Main.py, this video will be analysed
+- if you have them, you can add ground truth bathy data under the method "get_GroundTruth". Just stick to the example formats again and it should work
+
 Use COCOS
 ---------
 The COCOS code is currently set up in a MATLAB kind of style. Therefore it is advised to use spyder.
 
-(1) open a terminal in the COCOS envirnoment (if it isn't still open from installation)
-(2) type >"spyder"
-(3) Currently COCOS uses a basic plotter (which will definitely have to be improved in future). To be sure that plotting works, the plotting windows should open outside the spyder console. To check this go to >Tools>Preferences>IPython console>graphics> backend: Automatic
-(4) open the Main.py file within the cocos_map folder in COCOS_main and just run it.
+1. open a terminal in the COCOS envirnoment (if it isn't still open from installation)
+2. type >"spyder"
+3. Currently COCOS uses a basic plotter (which will definitely have to be improved in future). To be sure that plotting works, the plotting windows should open outside the spyder console. To check this go to >Tools>Preferences>IPython console>graphics> backend: Automatic
+4. open the Main.py file within the cocos_map folder in COCOS_main and just run it.
 
 By default, fieldsite = 'duck'. You may change this variable to another field site. The options currently are: 'duck', 'porthtowan', 'scheveningen', 'narrabeen' 
 
