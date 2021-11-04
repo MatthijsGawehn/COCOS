@@ -28,7 +28,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
     ],
-    description="on-the-flt estimation of coastal paramters from videos of a wave field",
+    description="on-the-fly estimation of coastal paramters from video of a wave field",
     entry_points={
         'console_scripts': [
             'cocos_map=cocos_map.cli:main',
