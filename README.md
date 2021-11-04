@@ -1,4 +1,4 @@
-# COCOS
+# COCOS (COastal COmmunity Scout)
 on-the-fly estimation of coastal parameters from (orthorectified) video of a wave field
 
 This is code based on the publication "Gawehn, M.; de Vries, S.; Aarninkhof, S. A self-adaptive method for mapping coastal bathymetry on-the-fly from wave field video. Remote Sens. 2021, 1, 0. https://doi.org/"
