@@ -1,5 +1,5 @@
 # COCOS
-on-the-fly estimation of coastal parameters from video of a wave field
+on-the-fly estimation of coastal parameters from (orthorectified) video of a wave field
 
 This is code based on the publication "Gawehn, M.; de Vries, S.; Aarninkhof, S. A self-adaptive method for mapping coastal bathymetry on-the-fly from wave field video. Remote Sens. 2021, 1, 0. https://doi.org/"
 
@@ -12,11 +12,11 @@ Although not necessary you may start by downloading anaconda and the anaconda na
 
 Installation of COCOS
 ---------------------
-(1) download the .zip to your preferred location ['my_COSOS_location'] and unzip
-(2) make a new environment and give it a name e.g. COCOS_env (if you use anaconda navigator >environments>create)
-(3) open terminal in that environment (in anaconda navigator > click on the new environment>press green circled arrow>open Terminal)
-(4) navigate to 'my_COCOS_location' by typing "cd " followed by "my_COCOS_location". Be sure you navigate into the 'COCOS_main' folder (in which you see the setup.py)
-(5) type >"pip install -e ."
+1. download the .zip to your preferred location ['my_COSOS_location'] and unzip
+2. make a new environment and give it a name e.g. COCOS_env (if you use anaconda navigator >environments>create)
+3. open terminal in that environment (in anaconda navigator > click on the new environment>press green circled arrow>open Terminal)
+4. navigate to 'my_COCOS_location' by typing "cd " followed by "my_COCOS_location". Be sure you navigate into the 'COCOS_main' folder (in which you see the setup.py)
+5. type >"pip install -e ."
 
 Getting the Video and Ground Truth Data
 ---------------------------------------
