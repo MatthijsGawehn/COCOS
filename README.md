@@ -31,8 +31,7 @@ Follow the link in the paper to download the data.
 To download Narrabeen ground truth data:
 
 Bathymetric validation data for this drone flight is kindly provided by the NSW Department of Planning, Industry and Environment (NSW DPIE, formerly NSW OEH). This data is available on the Australian Ocean Data Network (AODN) Data Portal. To access this data, do the following:
-1.            Click here on the following link:
-https://catalogue-imos.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/8b2ddb75-2f29-4552-af6c-eac9b02156a6 
+1.            Go to https://catalogue-imos.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/8b2ddb75-2f29-4552-af6c-eac9b02156a6 
 2.            Click on “View and download data through the AODN portal”
 3.            To navigate to Narrabeen Beach, select the bounding box 
 			N: --33.70
