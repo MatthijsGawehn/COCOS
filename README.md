@@ -15,10 +15,13 @@ Installation of COCOS
 install directly from PyPI:
 1. make a new environment and give it a name e.g. cocos_env (if you use anaconda navigator >environments>create)
 2. open terminal in that environment (in anaconda navigator > click on the new environment>press green circled arrow>open Terminal)
-3. type >"pip install cocos-map"
+3. type >"python -m pip install cocos-map" (this installs all the necessary packages including cocos-map)
+4. you currently cannot run cocos-map from the command prompt, instead you need to work with a Matlab-like file structure. This means that you need to navigate to the cocos_map site-package. It is located in the environment (cocos_env), which you've created and where you've just installed cocos-map (e.g., c:\Users\<yourname>\AppData\Local\Continuum\anaconda3\envs\<cocos_env>\Lib\site-packages\cocos_map).
+5. copy the site package "cocos_map" to your preferred location ['my_COCOS_location']
+6. create two additional folders in that location (on the same level as cocos_map). One named "data" and another one named "results".
 
 install from GitHub:
-1. download the .zip to your preferred location ['my_COSOS_location'] and unzip
+1. download the .zip to your preferred location ['my_COCOS_location'] and unzip
 2. make a new environment and give it a name e.g. cocos_env (if you use anaconda navigator >environments>create)
 3. open terminal in that environment (in anaconda navigator > click on the new environment>press green circled arrow>open Terminal)
 4. navigate to 'my_COCOS_location' by typing "cd " followed by "my_COCOS_location". Be sure you navigate into the 'COCOS_main' folder (in which you see the setup.py)
