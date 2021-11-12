@@ -17,8 +17,8 @@ install directly from PyPI:
 2. open terminal in that environment (in anaconda navigator > click on the new environment>press green circled arrow>open Terminal)
 3. type >"python -m pip install cocos-map" (this installs all the necessary packages including cocos-map)
 4. you currently cannot run cocos-map from the command prompt, instead you need to work with a Matlab-like file structure. This means that you need to navigate to the cocos_map site-package. It is located in the environment (cocos_env), which you've created and where you've just installed cocos-map (e.g., c:\Users\<yourname>\AppData\Local\Continuum\anaconda3\envs\<cocos_env>\Lib\site-packages\cocos_map).
-5. copy the site package "cocos_map" to your preferred location ['my_COCOS_location']
-6. create two additional folders in that location (on the same level as cocos_map). One named "data" and another one named "results".
+5. copy the site package 'cocos_map'. Create an empty folder named 'COCOS_main' at your preferred location ['my_COCOS_location']. Paste 'cocos_map' into 'COCOS_main".
+6. create two additional empty folders in 'COCOS_main' (on the same level as cocos_map). One named 'data' and another one named 'results'.
 
 install from GitHub:
 1. download the .zip to your preferred location ['my_COCOS_location'] and unzip
@@ -45,7 +45,7 @@ Bathymetric validation data for this drone flight is kindly provided by the NSW 
 5. Click on the download link to download the dataset as a zip file. The relevant data file is
 “NSWOEH_20170529_NarrabeenNorthenBeaches_STAX_2017_0529_Narrabeen_Post_ECL_No4_Hydro_Depths.xyz”
 
-copy the data in the "data" folder in "COCOS_main"
+copy all data in the 'data' folder in 'COCOS_main'
 
 If you want to try your own data:
 - go to Data.py
