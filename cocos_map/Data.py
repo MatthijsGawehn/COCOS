@@ -161,8 +161,23 @@ class Data():
             Z_groundTruth   = interpolate.griddata((bathyx, bathyy), bathyz,(grid.X, grid.Y),method='linear')   
             D_groundTruth   = -1*Z_groundTruth+WL                    
         elif Video.label == 'narrabeen':
+            # TO DOWNLOAD THE NARRABEEN GROUND TRUTH DATA:
+            # Bathymetric validation data for this drone flight is kindly provided by the NSW Department of Planning, Industry and Environment (NSW DPIE, formerly NSW OEH). This data is available on the Australian Ocean Data Network (AODN) Data Portal. To access this data, do the following:
+            # 1)            Click here on the following link:
+            # https://catalogue-imos.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/8b2ddb75-2f29-4552-af6c-eac9b02156a6             
+            # 2)            Click on “View and download data through the AODN portal”
+            # 3)            To navigate to Narrabeen Beach, select the bounding box             
+            #                           N: --33.70
+            #                           S: -33.74
+            #                           E: 151.33
+            #                           W: 151.29             
+            # 4)            At the bottom of the page, click “Next”
+            # 5)            Click on the download link to download the dataset as a zip file. The relevant data file is             
+            # "NSWOEH_20170529_NarrabeenNorthenBeaches_STAX_2017_0529_Narrabeen_Post_ECL_No4_Hydro_Depths.xyz”             
+            # Note that this data is provided in EPSG 32756 (MGA94 Zone 56) and is referenced to Australian Height Datum (approximating MSL)    
+            # Put the downloaded file in the "data" directory
             WL              = 0.67
-            with open('../data/GroundTruth_Narrabeen.xyz') as f:
+            with open('../data/NSWOEH_20170529_NarrabeenNorthenBeaches_STAX_2017_0529_Narrabeen_Post_ECL_No4_Hydro_Depths.xyz') as f:
                 list_of_lists   = [line.split() for line in f]
                 bathy_xyz       = np.array(list_of_lists, dtype = float)
             Z_groundTruth   = interpolate.griddata((bathy_xyz[:,0], bathy_xyz[:,1]), bathy_xyz[:,2],(grid.X, grid.Y),method='linear')
