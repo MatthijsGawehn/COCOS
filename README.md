@@ -1,7 +1,7 @@
 # COCOS (COastal COmmunity Scout)
 on-the-fly estimation of coastal parameters from (orthorectified) video of a wave field
 
-This is code based on the publication "Gawehn, M.; de Vries, S.; Aarninkhof, S. A self-adaptive method for mapping coastal bathymetry on-the-fly from wave field video. Remote Sens. 2021, 1, 0. https://doi.org/"
+This is code based on the publication "Gawehn, M.; de Vries, S.; Aarninkhof, S. A self-adaptive method for mapping coastal bathymetry on-the-fly from wave field video. Remote Sens. 2021, 1, 0. https://doi.org/10.3390/rs13234742"
 
 Quick user guide
 ================
@@ -35,15 +35,15 @@ To download Narrabeen ground truth data:
 
 Bathymetric validation data for this drone flight is kindly provided by the NSW Department of Planning, Industry and Environment (NSW DPIE, formerly NSW OEH). This data is available on the Australian Ocean Data Network (AODN) Data Portal. To access this data, do the following:
 1. Go to https://catalogue-imos.aodn.org.au/geonetwork/srv/eng/catalog.search#/metadata/8b2ddb75-2f29-4552-af6c-eac9b02156a6 
-2. Click on ìView and download data through the AODN portalî
+2. Click on ‚ÄúView and download data through the AODN portal‚Äù
 3. To navigate to Narrabeen Beach, select the bounding box 
 	N: --33.70
 	S: -33.74
 	E: 151.33
 	W: 151.29 
-4. At the bottom of the page, click ìNextî
+4. At the bottom of the page, click ‚ÄúNext‚Äù
 5. Click on the download link to download the dataset as a zip file. The relevant data file is
-ìNSWOEH_20170529_NarrabeenNorthenBeaches_STAX_2017_0529_Narrabeen_Post_ECL_No4_Hydro_Depths.xyzî
+‚ÄúNSWOEH_20170529_NarrabeenNorthenBeaches_STAX_2017_0529_Narrabeen_Post_ECL_No4_Hydro_Depths.xyz‚Äù
 
 copy all data in the 'data' folder in 'COCOS_main'
 
