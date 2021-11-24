@@ -45,7 +45,7 @@ Bathymetric validation data for this drone flight is kindly provided by the NSW 
 5. Click on the download link to download the dataset as a zip file. The relevant data file is
 “NSWOEH_20170529_NarrabeenNorthenBeaches_STAX_2017_0529_Narrabeen_Post_ECL_No4_Hydro_Depths.xyz”
 
-copy all data in the 'data' folder in 'COCOS_main'
+copy the data from the field sites into the 'data' folder in 'COCOS_main'
 
 If you want to try your own data:
 - go to Data.py
